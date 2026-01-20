@@ -5,9 +5,9 @@ services:
     ports:
       - "5000:5000"
     networks:
-      - airflow_default
+      - app-network
     restart: unless-stopped
 
 networks:
-  airflow_default:
-    external: true
+  app-network:
+    driver: bridge
