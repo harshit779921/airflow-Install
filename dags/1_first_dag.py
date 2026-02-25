@@ -1,5 +1,6 @@
 from airflow.decorators import dag, task
 
+
 @dag(
         dag_id="first_dag"
 )
