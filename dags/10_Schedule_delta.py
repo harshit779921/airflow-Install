@@ -1,0 +1,36 @@
+from airflow.sdk import dag, task 
+from pendulum import datetime
+from datetime import timedelta
+
+@dag(
+        dag_id="delta_schedule_dag",
+        start_date = datetime(year=2026, month=3, day=17, tz="America/Halifax"),
+        schedule= timedelta(days=3),  # This means the DAG will run every 3 days
+        end_date = datetime(year=2026, month=3, day=31, tz="America/Halifax"),
+        is_paused_upon_creation=False, # This will ensure the DAG is active and will run according to the schedule immediately after creation
+        catchup= True
+)
+def delta_schedule_dag():
+
+    @task.python
+    def first_task():
+        print("This is the first task")
+
+    @task.python
+    def second_task():
+        print("This is the second task")
+    
+    @task.python
+    def third_task():
+        print("This is the third task. DAG complete!")
+    
+    
+    # Defining task dependencies
+    first = first_task()
+    second = second_task()
+    third = third_task()
+    
+    first >> second >> third
+
+# Instantiating the DAG
+delta_schedule_dag()
