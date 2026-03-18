@@ -4,9 +4,9 @@ from datetime import timedelta
 
 @dag(
         dag_id="delta_schedule_dag",
-        start_date = datetime(year=2026, month=3, day=17, tz="America/Halifax"),
+        start_date = datetime(year=2026, month=1, day=26, tz="America/Halifax"),
         schedule= timedelta(days=3),  # This means the DAG will run every 3 days
-        end_date = datetime(year=2026, month=3, day=31, tz="America/Halifax"),
+        end_date = datetime(year=2026, month=1, day=31, tz="America/Halifax"),
         is_paused_upon_creation=False, # This will ensure the DAG is active and will run according to the schedule immediately after creation
         catchup= True
 )
